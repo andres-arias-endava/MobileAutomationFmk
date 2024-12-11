@@ -3,21 +3,25 @@ plugins {
 }
 
 repositories {
-    mavenCentral() // Repository for dependencies
+    mavenCentral()
 }
 
 dependencies {
-    // Appium Java Client for mobile automation
     implementation 'io.appium:java-client:8.5.1'
-
-    // TestNG to organize and execute tests
+    implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
     testImplementation 'org.testng:testng:7.9.0'
-
-    // (Optional) ExtentReports to generate test reports
-    implementation 'com.aventstack:extentreports:5.0.9'
+    testImplementation 'io.qameta.allure:allure-testng:2.17.3'
 }
 
 test {
-    // Configure TestNG as the test framework
-    useTestNG()
+    useTestNG() // Indica a Gradle que use TestNG
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+sourceSets {
+    test {
+        java.srcDirs = ['src/test/java']
+    }
 }
